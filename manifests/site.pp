@@ -1,7 +1,6 @@
 # Definition
 #
-
-define apache::site($vhosts,$vapps,$status="desactivate",$php="disabled") {
+define apache::site($vhosts,$vapps,$status="disabled") {
 
 	include apache
 
@@ -21,14 +20,14 @@ define apache::site($vhosts,$vapps,$status="desactivate",$php="disabled") {
 	}
 
 	case $status {
-		'activate' : {
+		'enable' : {
 			exec { "/usr/sbin/a2ensite ${vhosts}":
 				unless	=> "/bin/readlink -e /etc/apache2/sites-enabled/${vhosts}",
 				notify	=> Exec["reload-apache2"],
 				require	=> Package["apache2"],
 			}
 		}
-		'desactivate': {
+		'disabled': {
 			exec { "/usr/sbin/a2dissite ${vhosts}":
 				onlyif	=> "/bin/readlink -e /etc/apache2/sites-enabled/${vhosts}",
 				notify	=> Exec["reload-apache2"],
@@ -40,26 +39,4 @@ define apache::site($vhosts,$vapps,$status="desactivate",$php="disabled") {
 		}
 	}
 
-	case $php {
-		'enable' : {
-		        package { 'libapache2-mod-php5':
-				ensure => installed,
-				notify	=> Exec["reload-apache2"]
-			}
-		}
-		'disabled' : {
-		        package { 'libapache2-mod-php5':
-				ensure => purged,
-				notify	=> Exec["reload-apache2"]
-			}
-		}
-		default: {
-			err ("La valeur du parametre php est inconnue.")
-		}		
-	}
-
-	exec { "reload-apache2":
-		command => "/etc/init.d/apache2 reload",
-		refreshonly => true,
-	}
 }
