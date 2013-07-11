@@ -1,6 +1,6 @@
 # Definition
 #
-define apache::site($vhosts,$vapps,$status="disabled") {
+define apache::site($vhosts,$vapps,$status="disabled",$ssl="disabled") {
 
 	include apache
 
