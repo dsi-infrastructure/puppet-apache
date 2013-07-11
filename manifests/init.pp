@@ -6,10 +6,15 @@ class apache {
 	}
 
 	service { "apache2":
-		ensure 			=> running,
+		ensure 		=> running,
 		hasstatus 	=> true,
 		hasrestart	=> true,
-		require			=> Package["apache2"],
+		require		=> Package["apache2"],
 	}
+
+        exec { "reload-apache2":
+                command => "/etc/init.d/apache2 reload",
+                refreshonly => true,
+        }
 
 }
