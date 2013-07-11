@@ -1,7 +1,11 @@
 # Class apache
 #
-class apache {
+class apache($status="disabled", $apachemodules) {
 	package { 'apache2':
+		ensure => installed
+	}
+
+	package { $apachemodules:
 		ensure => installed
 	}
 
