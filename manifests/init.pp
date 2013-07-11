@@ -1,4 +1,4 @@
-# Class
+# Class apache
 #
 class apache {
 	package { 'apache2':
@@ -6,10 +6,10 @@ class apache {
 	}
 
 	service { "apache2":
-  	ensure => running,
-    hasstatus => true,
-    hasrestart => true,
-    require => Package["apache2"],
-  }
+		ensure 			=> running,
+		hasstatus 	=> true,
+		hasrestart	=> true,
+		require			=> Package["apache2"],
+	}
 
 }
