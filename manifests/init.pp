@@ -1,7 +1,7 @@
 # Class apache
 #
 class apache($status="disabled", $apachemodules) {
-	package { 'apache2':
+  package { 'apache2':
 		ensure => installed
 	}
 
@@ -16,9 +16,8 @@ class apache($status="disabled", $apachemodules) {
 		require		=> Package["apache2"],
 	}
 
-        exec { "reload-apache2":
-                command => "/etc/init.d/apache2 reload",
-                refreshonly => true,
-        }
-
+  exec { "reload-apache2":
+    command => "/etc/init.d/apache2 reload",
+    refreshonly => true,
+  }
 }

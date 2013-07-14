@@ -27,7 +27,8 @@ define apache::site($vhosts,$vapps,$status="disabled",$ssl="disabled") {
 				require	=> Package["apache2"],
 			}
 		}
-		'disabled': {
+    
+    'disabled': {
 			exec { "/usr/sbin/a2dissite ${vhosts}":
 				onlyif	=> "/bin/readlink -e /etc/apache2/sites-enabled/${vhosts}",
 				notify	=> Exec["reload-apache2"],
