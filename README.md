@@ -1,3 +1,5 @@
+# Apache
+
 # Installation du module
 
 ```
@@ -25,3 +27,9 @@ node test {
         }
 }
 ```
+
+# A faire
+
+- Activer le mode SSL
+- Tests unitaires
+- Travis CI
