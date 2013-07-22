@@ -1,18 +1,17 @@
-# Apache
+# Apache [![Build Status](https://travis-ci.org/sipf-infrastructure/apache.png?branch=master)](https://travis-ci.org/sipf-infrastructure/apache)
 
-# Installation du module
+## Installation du module
 
-```
+```bash
 $ mkdir apache
 $ cd apache
 $ git clone https://github.com/sipf-infrastructure/apache.git
-
 ```
 
-# Utilisation
+## Utilisation
 
 Dans le fichier '/etc/puppet/manifests/site.pp', on définit ce qui suit :
-```
+```ruby
 node test {
         class { 'apache':
                 status          => enable,
@@ -28,8 +27,6 @@ node test {
 }
 ```
 
-# A faire
+## A faire
 
 - Activer le mode SSL
-- Tests unitaires
-- Travis CI
