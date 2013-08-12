@@ -1,0 +1,5 @@
+<VirtualHost *:80>
+    ServerName <%= name %>
+    DocumentRoot /var/www/<%= vapps %>
+    Redirect / https://<%= name %>/
+</VirtualHost>

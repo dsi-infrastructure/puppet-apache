@@ -1,0 +1,28 @@
+<VirtualHost *:443>
+        ServerAdmin support@informatique.gov.pf
+        ServerName <%= name %>
+        DocumentRoot /var/www/<%= vapps %>
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory /var/www/>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/<%= vapps %>-error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog ${APACHE_LOG_DIR}/<%= vapps %>-access.log combined
+
+        SSLEngine on
+        SSLCertificateFile    /etc/ssl/certs/<%= fqdn %>.crt
+        SSLCertificateKeyFile /etc/ssl/private/<%= fqdn %>.key
+
+</VirtualHost>
