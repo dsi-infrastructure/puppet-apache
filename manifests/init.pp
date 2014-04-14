@@ -21,7 +21,7 @@ class apache(
 #        notify  => Service['apache2'],
 #    }
 
-#    file { "${name}-key":
+#   file { "${name}-key":
 #        ensure  => file,
 #        path    => "/etc/ssl/private/${fqdn}.key",
 #        source  => "puppet:///certs/${fqdn}.key",
