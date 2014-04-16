@@ -1,32 +1,20 @@
-# Apache [![Build Status](https://travis-ci.org/sipf-infrastructure/apache.png?branch=master)](https://travis-ci.org/sipf-infrastructure/apache)
+## Utilisation du module
 
-## Installation du module
+* Ce module utilise les "hiera", veuillez créer un répertoire "apache" dans le dossier hieradata.
+* Dans ce nouveau répertoire veuillez créer un fichier portant le nom suivant : srv1.dev.yaml
+* Ce fichier doit contenir ce qui suit :
 
-```bash
-$ mkdir apache
-$ cd apache
-$ git clone https://github.com/sipf-infrastructure/apache.git
+```
+---
+apache::modules:
+    - 'libapache2-mod-php5'
+    - 'php5-mysql'
+apache::status: 'enable'
+apache::ssl: 'disabled'
+apache::vhost:
+    'example.com':
+        vapps: 'apps'
+        status: 'enable'
+        ssl: 'disabled'
 ```
 
-## Utilisation
-
-Dans le fichier '/etc/puppet/manifests/site.pp', on définit ce qui suit :
-```ruby
-node test {
-        class { 'apache':
-                status          => enable,
-                apachemodules   => ["libapache2-mod-php5"],
-        }
-
-        apache::site { 'wiki.srv.gov.pf':
-                status          => enable,
-                vhosts          => 'wiki.srv.gov.pf',
-                vapps           => 'mediawiki',
-                ssl             => enable,
-        }
-}
-```
-
-## A faire
-
-- Activer le mode SSL
