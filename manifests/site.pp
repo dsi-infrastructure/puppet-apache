@@ -59,7 +59,7 @@ define apache::site (
                 require => Package['apache2'],
             }
             
-            file["${name}-enable"] ->
+            File["${name}-enable"] ->
             Exec["/usr/sbin/a2ensite ${name}"]
         }
         'disabled': {
@@ -85,8 +85,8 @@ define apache::site (
             }
 
             Exec["/usr/sbin/a2dissite ${name}"] ->
-            file["${name}-disabled"] ->
-            file["${name}-disabled-443"]
+            File["${name}-disabled"] ->
+            File["${name}-disabled-443"]
         }
         default: {
             err (
